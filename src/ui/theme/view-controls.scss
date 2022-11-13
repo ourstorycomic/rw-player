@@ -1,0 +1,174 @@
+.igui_container_controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  display: flex;
+
+  opacity: 0;
+  transition: opacity 100ms linear;
+
+  &:before {
+    content: '';
+    position: absolute;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .igui_button {
+    width: 36px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    opacity: 0.9;
+
+    .igui_state-fullscreen & {
+      width: big-mode(36px);
+      height: big-mode(40px);
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .igui_icon {
+      font-size: 26px;
+
+      .igui_state-fullscreen & {
+        font-size: big-mode(26px);
+      }
+    }
+
+    .igui_button_tooltip {
+      position: absolute;
+      bottom: 58px;
+      left: 50%;
+      pointer-events: none;
+      transform: translateX(-50%);
+      background-color: #222222;
+      border-radius: 2px;
+      padding: 4px 6px;
+      white-space: nowrap;
+
+      .igui_state-fullscreen & {
+        bottom: big-mode(58px);
+      }
+    }
+  }
+
+  .igui_button_name-play {
+    margin-left: 9px;
+
+    .igui_button_tooltip {
+      left: 2px;
+      transform: translateX(0);
+    }
+  }
+
+  .igui_timestat {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+
+    .igui_timestat_duration {
+      position: relative;
+      margin-left: 8px;
+
+      &:before {
+        position: absolute;
+        content: '/';
+        left: -6px;
+      }
+    }
+  }
+
+  .igui_button_name-fullscreen {
+    margin-right: 9px;
+
+    @keyframes fullscreen-hover {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    &:hover {
+      .igui_icon {
+        animation-name: fullscreen-hover;
+        animation-duration: 350ms;
+      }
+    }
+
+    .igui_button_tooltip {
+      right: 2px;
+      left: auto;
+      transform: translateX(0);
+    }
+  }
+
+  .igui_button_name-settings {
+    .igui_icon {
+      transform: rotate(0deg);
+      transition: transform 150ms ease-in-out;
+    }
+
+    &.igui_button_state-active .igui_icon {
+      transform: rotate(35deg);
+    }
+  }
+
+  .igui_button_name-subtitle {
+    &:before {
+      content: '';
+      position: absolute;
+      height: 2px;
+      height: 2px;
+      background-color: #ffffff;
+      bottom: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0px;
+      transition: width 120ms linear;
+    }
+
+    &.igui_button_state-active {
+      position: relative;
+
+      &:before {
+        width: 21px;
+      }
+    }
+  }
+
+  .igui_state-active & {
+    opacity: 1;
+  }
+}
+
+.igui_container_controls_seekbar {
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 34px;
+
+  .igui_state-fullscreen & {
+    bottom: big-mode(34px);
+  }
+}

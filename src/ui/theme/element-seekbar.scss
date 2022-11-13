@@ -1,0 +1,111 @@
+$seekbar-bars-height: 5px;
+$seekbar-scrubber-radius: 13px;
+
+.igui_seekbar {
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: 6px;
+  padding-top: 16px;
+}
+
+.igui_seekbar_bars {
+  height: $seekbar-bars-height;
+  background-color: rgba(255, 255, 255, .3);;
+  position: relative;
+  width: 100%;
+  transform: scaleY(0.6);
+  transition: transform 75ms linear;
+
+  .igui_seekbar_state-active & {
+    transform: scaleY(1);
+  }
+}
+
+.igui_seekbar_progress {
+  @include stretch();
+  transform-origin: left;
+  background-color: #ffffff;
+}
+
+.igui_seekbar_ahead {
+  @include stretch();
+  transform-origin: left;
+  background-color: rgba(255, 255, 255, .3);
+  z-index: -1;
+}
+
+.igui_seekbar_buffered {
+  @include stretch();
+  transform-origin: left;
+  background-color: rgba(255, 255, 255, .3);
+}
+
+.igui_seekbar_scrubber {
+  width: $seekbar-scrubber-radius;
+  height: $seekbar-scrubber-radius;
+  background-color: #ffffff;
+  border-radius: 100%;
+  position: absolute;
+  transition: transform 75ms linear;
+  transform-origin: center;
+  transform: scale(0);
+  margin-left: -($seekbar-scrubber-radius / 2);
+  z-index: 1;
+
+  .igui_seekbar_state-active & {
+    transform: scale(1);
+  }
+}
+
+.igui_seekbar_state-playingad {
+  pointer-events: none;
+
+  .igui_seekbar_progress {
+    background-color: #ffe600;
+  }
+}
+
+.igui_seekbar_cuepoint {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #ffe600;
+}
+
+.igui_seekbar_tooltip {
+  position: absolute;
+  bottom: 24px;
+  transform: translateX(-50%);
+  padding: 4px 6px;
+  background-color: #222222;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+
+  .igui_seekbar_state-active & {
+    opacity: 1;
+  }
+}
+
+.igui_seekbar_thumbnail {
+  position: absolute;
+  bottom: 24px;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 2px;
+  overflow: hidden;
+
+  .igui_seekbar_thumbnail_sprite {
+    width: 100px;
+    height: 100px * (9 / 16);
+  }
+
+  .igui_seekbar_state-active & {
+    opacity: 1;
+  }
+}
